@@ -90,8 +90,7 @@ function updateFrame(){
     if(!left && !right && !up && !down){
         srcY = trackUp * height;
        x == speed;
-    }
-    
+    } 
     //if left is true and the character has not reached the left edge
     if(left && x > 0){
         //Calculate srcY
@@ -99,7 +98,6 @@ function updateFrame(){
         //decreasing the x coordinate
         x -= speed;
     }
-    
     //if the right is true and the characher has not reached the right edge
     if(right && x < canvasWidth - width){
         //calculate srcY
@@ -121,13 +119,25 @@ function updateFrame(){
         //decrease speed
         y -= speed;
     }
+     if(x < 200 && x + width > 100 && y < 350 && height + y > 250){
+        alert("You've made a collision!");
+    }
 }
 
+function drawSquare(){
+				ctx.beginPath();
+				ctx.rect(100, 250, 100, 100);
+				ctx.fillStyle = "#0095DD";
+				ctx.fill();
+				ctx.closePath();
+			}
 function draw() {
     //Updating the frame
     updateFrame();
+     drawSquare();
     //Draw the image
     ctx.drawImage(character, srcX, srcY, width, height, x, y, width, height);
+   
 }
 
 setInterval(draw, 100);
