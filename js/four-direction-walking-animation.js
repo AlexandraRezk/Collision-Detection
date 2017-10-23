@@ -18,12 +18,12 @@ var width = spriteWidth/cols;
 var height = spriteHeight/rows;
 //First frame of each row
 var currentFrame = 0;
-//Total number of frams
+//Total number of frames
 var frameCount = 9;
 //x and y coordinates to render the sprite on the canvas
 var x = 0;
 var y = 0;
-//x and y coordinates for the sprite frame from the spritesheet
+//x and y coordinates for the sprites frame from the spritesheet
 var srcX = 0;
 var srcY = 0;
 //tracking the character movement
@@ -87,8 +87,11 @@ function updateFrame(){
     srcX = currentFrame * width;
     ctx.clearRect(x, y, width, height);
     
+    //if no keys are pressed make sprite face upwards
     if(!left && !right && !up && !down){
+        //Calculate srcY
         srcY = trackUp * height;
+        //x is equal to the speed
        x == speed;
     } 
     //if left is true and the character has not reached the left edge
@@ -119,11 +122,14 @@ function updateFrame(){
         //decrease speed
         y -= speed;
     }
+    
+    //Collision Detection
      if(x < 200 && x + width > 100 && y < 350 && height + y > 250){
         alert("You've made a collision!");
     }
 }
 
+//The draw a square function
 function drawSquare(){
 				ctx.beginPath();
 				ctx.rect(100, 250, 100, 100);
@@ -131,11 +137,13 @@ function drawSquare(){
 				ctx.fill();
 				ctx.closePath();
 			}
+
 function draw() {
     //Updating the frame
     updateFrame();
+    //Draws the square
      drawSquare();
-    //Draw the image
+    //Draws the image
     ctx.drawImage(character, srcX, srcY, width, height, x, y, width, height);
    
 }
